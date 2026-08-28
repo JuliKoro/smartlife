@@ -20,11 +20,13 @@ public class Comercio {
 
 	public Comercio(long id) {
 		this.id = id;
+        // Inicialización interna obligatoria de las colecciones
 		this.productos = new ArrayList<>();
 		this.observadores = new ArrayList<>();
         this.ventas = new ArrayList<>();
 	}
 
+    // Producto ... productos -> para recibir parametros variables
     public void agregarProducto(Producto ... productos) {
         Collections.addAll(this.productos, productos);
     }
@@ -38,6 +40,7 @@ public class Comercio {
             throw new IllegalArgumentException("El comercio no puede registrar ventas de productos que no vende");
         }
         this.ventas.add(venta);
+        // Notificar a cada Observador por la Venta hecha
         this.observadores.forEach(o -> o.serNotificadoDe(venta));
     }
 

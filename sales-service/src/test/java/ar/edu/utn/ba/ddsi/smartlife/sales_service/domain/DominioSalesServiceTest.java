@@ -34,8 +34,9 @@ class DominioSalesServiceTest {
     private ObservadorSvibaa observadorSvibaa;
     private Comercio comercio;
 
+	// Instanciar y configurar desde cero las entidades compartidas antes de cada métoodo de test
 	@BeforeEach
-	void setUp() {
+	void setUp() { // Inicializacion
 		IVA.setPorcentaje(0.21);
 		EO.setFactorPrecioBase(0.5);
 		EO.setCoeficienteGanancias(4);
@@ -44,6 +45,7 @@ class DominioSalesServiceTest {
 		EI.setFactorGanancias(0.3);
 		EI.setGananciasImpositivas(3.5);
 
+		// Configuración Dinámica de Impuestos
 		tipoElectronico = new TipoProducto("Electrónico");
 		tipoElectronico.agregarImpuestos(new IVA(), new EO());
 
@@ -60,8 +62,10 @@ class DominioSalesServiceTest {
         comercio.agregarObservadores(observadorSvibaa, observadorSffa);
 	}
 
+	// Casos de Prueba
 	@Test
 	void ventaUnProductoElectronico_verificaIvaMasEo() {
+		// Verificación de Producto Electrónico ("Smart TV 50")
 		Producto tv = new Producto(null, tipoElectronico, PRECIO_BASE_EJEMPLO, "Smart TV 50");
 
 		Venta venta = new Venta(generadorIdSecuencial.siguiente());
@@ -79,6 +83,7 @@ class DominioSalesServiceTest {
 
 	@Test
 	void ventaUnProductoHogar_verificaIvaMasEi() {
+		// Verificación de Producto de Hogar ("Cafetera Express")
 		Producto cafetera = new Producto(null, tipoHogar, PRECIO_BASE_EJEMPLO, "Cafetera Express");
 
 		Venta venta = new Venta(generadorIdSecuencial.siguiente());
@@ -91,6 +96,7 @@ class DominioSalesServiceTest {
 
 	@Test
 	void ventaDosProductosElectronicos_impuestosPorProductoYTotal() {
+		// Ventas Simples y Compuestas (ItemVenta)
 		Producto tv1 = new Producto(null, tipoElectronico, PRECIO_BASE_EJEMPLO, "Smart TV 50");
 		Producto tv2 = new Producto(null, tipoElectronico, PRECIO_BASE_EJEMPLO, "Smart TV 50");
 		assertEquals(IMPUESTOS_ELECTRONICO_UNIT, tv1.totalImpuestos(), 1);
@@ -107,6 +113,7 @@ class DominioSalesServiceTest {
 
 	@Test
 	void ventaMixtaElectronicoYHogar_aplicaImpuestosCorrespondientes() {
+		// Ventas Simples y Compuestas (ItemVenta)
 		Producto tv = new Producto(null, tipoElectronico, PRECIO_BASE_EJEMPLO, "Smart TV 50");
 		Producto cafetera = new Producto(null, tipoHogar, PRECIO_BASE_EJEMPLO, "Cafetera Express");
 

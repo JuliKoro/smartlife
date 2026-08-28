@@ -16,7 +16,7 @@ public class Venta {
 
 	public Venta(long id) {
 		this.id = id;
-		this.fechaRegistro = LocalDate.now();
+		this.fechaRegistro = LocalDate.now(); // c/v q se instancia la venta, se deja el sello de la fecha actual en ese momento
 		this.items = new ArrayList<>();
 	}
 

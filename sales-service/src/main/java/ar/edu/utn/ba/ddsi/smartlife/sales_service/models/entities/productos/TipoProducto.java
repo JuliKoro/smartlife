@@ -19,10 +19,12 @@ public class TipoProducto {
 		this.impuestos = new ArrayList<>();
 	}
 
+	// Puede recibir y agregar de a varios impuestos
 	public void agregarImpuestos(Impuesto... impuestosNuevos) {
 		Collections.addAll(this.impuestos, impuestosNuevos);
 	}
 
+	// Producto no sabe calcular impuestos; delega la responsabilidad a su TipoProducto
 	public double totalImpuestos(Producto producto) {
         return this.impuestos.stream().mapToDouble(i -> i.calcular(producto)).sum();
 	}

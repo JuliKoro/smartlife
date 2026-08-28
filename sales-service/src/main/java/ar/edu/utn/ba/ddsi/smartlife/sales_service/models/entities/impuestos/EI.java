@@ -4,8 +4,11 @@ import ar.edu.utn.ba.ddsi.smartlife.sales_service.models.entities.productos.Prod
 import lombok.Getter;
 import lombok.Setter;
 
+// implementa la interfaz de Impuesto
 public class EI implements Impuesto {
 
+	// se pone static, porque son variables de clase, se pueden utilizar sin instanciar la clase
+	// si cambio dicho valor, cambia globalmente para todas las instancias que hayan
 	@Getter
 	@Setter
 	private static double divisorPrecioBase = 4;
